@@ -1,17 +1,23 @@
 document.addEventListener('keydown', function(event) {
-    switch(event.key) {
-        case 'a': // 'A' key to go to the previous post
-            simulateKey('ArrowLeft');
-            break;
-        case 'd': // 'D' key to go to the next post
-            simulateKey('ArrowRight');
-            break;
-        case 'w': // 'W' key to scroll up
-            window.scrollBy(0, -100);
-            break;
-        case 's': // 'S' key to scroll down
-            window.scrollBy(0, 100);
-            break;
+    // Check if the focus is on an input or textarea element
+    const activeElement = document.activeElement;
+    const isInputFocused = activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA' || activeElement.isContentEditable;
+
+    if (!isInputFocused) {
+        switch(event.key) {
+            case 'a': // 'A' key to go to the previous post
+                simulateKey('ArrowLeft');
+                break;
+            case 'd': // 'D' key to go to the next post
+                simulateKey('ArrowRight');
+                break;
+            case 'w': // 'W' key to scroll up
+                window.scrollBy(0, -100);
+                break;
+            case 's': // 'S' key to scroll down
+                window.scrollBy(0, 100);
+                break;
+        }
     }
 });
 
