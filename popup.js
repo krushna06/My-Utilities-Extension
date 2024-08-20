@@ -1,15 +1,14 @@
-// Get the toggle checkbox
-const toggleKeybinds = document.getElementById('toggleKeybinds');
+document.addEventListener('DOMContentLoaded', function() {
+    chrome.storage.sync.get(['keybindsEnabled', 'audioEnabled'], function(result) {
+        document.getElementById('toggleKeybinds').checked = result.keybindsEnabled !== false;
+        document.getElementById('toggleAudio').checked = result.audioEnabled !== false;
+    });
 
-// Load the current state from storage and set the checkbox
-chrome.storage.sync.get(['keybindsEnabled'], function(result) {
-    toggleKeybinds.checked = result.keybindsEnabled !== false; // Default to true if not set
-});
+    document.getElementById('toggleKeybinds').addEventListener('change', function() {
+        chrome.storage.sync.set({ keybindsEnabled: this.checked });
+    });
 
-// Listen for changes to the checkbox
-toggleKeybinds.addEventListener('change', function() {
-    const keybindsEnabled = toggleKeybinds.checked;
-    chrome.storage.sync.set({ keybindsEnabled: keybindsEnabled }, function() {
-        console.log('Keybinds are ' + (keybindsEnabled ? 'enabled' : 'disabled'));
+    document.getElementById('toggleAudio').addEventListener('change', function() {
+        chrome.storage.sync.set({ audioEnabled: this.checked });
     });
 });
