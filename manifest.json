@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Instagram Utilities",
+  "name": "n0step Utilities",
   "version": "1.1",
-  "description": "Use WASD keys to navigate Instagram posts & listen to audio in background.",
+  "description": "My utility extension for Microsoft Edge.",
   "permissions": ["activeTab", "storage"],
   "action": {
     "default_popup": "popup.html",
@@ -16,6 +16,10 @@
     {
       "matches": ["https://www.instagram.com/*"],
       "js": ["content.js"]
+    },
+    {
+      "matches": ["*://*.twitch.tv/*"],
+      "js": ["twitch.js"]
     }
   ]
 }
