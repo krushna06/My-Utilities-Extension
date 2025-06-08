@@ -20,6 +20,10 @@
     {
       "matches": ["*://*.twitch.tv/*"],
       "js": ["twitch.js"]
+    },
+    {
+      "matches": ["*://*.douyin.com/*"],
+      "js": ["douyin.js"]
     }
   ]
 }
