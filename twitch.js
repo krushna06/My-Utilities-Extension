@@ -1,3 +1,14 @@
+function clickClaimBonusButton() {
+    const claimButtons = Array.from(document.querySelectorAll('button[aria-label="Claim Bonus"]'));
+    
+    claimButtons.forEach(button => {
+        if (button.offsetParent !== null) {
+            button.click();
+            console.log('Auto-clicked "Claim Bonus" button');
+        }
+    });
+}
+
 function clickReturnToStreamButton() {
     const buttons = Array.from(document.querySelectorAll('div[data-a-target="tw-core-button-label-text"]'));
     const returnButton = buttons.find(btn => 
@@ -13,6 +24,11 @@ function clickReturnToStreamButton() {
     }
 }
 
-setInterval(clickReturnToStreamButton, 1000);
-document.addEventListener('DOMContentLoaded', clickReturnToStreamButton);
-document.addEventListener('load', clickReturnToStreamButton, true);
+function runChecks() {
+    clickReturnToStreamButton();
+    clickClaimBonusButton();
+}
+
+setInterval(runChecks, 1000);
+document.addEventListener('DOMContentLoaded', runChecks);
+document.addEventListener('load', runChecks, true);
