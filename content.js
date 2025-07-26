@@ -1,9 +1,35 @@
 (function() {
     'use strict';
     
+    function unmuteInstagramVideos() {
+        const muteButton = document.querySelector('svg[aria-label="Audio is muted"]')?.closest('button, div');
+        if (muteButton) {
+            console.log('Found muted video, unmuting...');
+            muteButton.click();
+            return true;
+        }
+        return false;
+    }
+
+    const observer = new MutationObserver(() => {
+        unmuteInstagramVideos();
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: false,
+        characterData: false
+    });
+
+    unmuteInstagramVideos();
+
     window.addEventListener("visibilitychange", function(event) {
         console.log("Visibility changed: ", document.visibilityState);
         event.stopImmediatePropagation();
+        if (document.visibilityState === 'visible') {
+            setTimeout(unmuteInstagramVideos, 500);
+        }
     }, true);
 
     chrome.storage.sync.get(['keybindsEnabled'], function(result) {
@@ -28,7 +54,6 @@
                             break;
                     }
                 } else {
-                    // Default behavior for other Instagram pages
                     switch(event.key) {
                         case 'a': // 'A' key to go to the previous post
                             simulateKey('ArrowLeft');
