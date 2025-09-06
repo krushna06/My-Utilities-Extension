@@ -9,24 +9,25 @@ function clickClaimBonusButton() {
     });
 }
 
-function clickReturnToStreamButton() {
+function clickLabelButton(labelText) {
     const buttons = Array.from(document.querySelectorAll('div[data-a-target="tw-core-button-label-text"]'));
-    const returnButton = buttons.find(btn => 
-        btn.textContent.trim() === "Return to stream"
+    const targetButton = buttons.find(btn => 
+        btn.textContent.trim() === labelText
     );
     
-    if (returnButton) {
-        const buttonElement = returnButton.closest('button');
+    if (targetButton) {
+        const buttonElement = targetButton.closest('button, div.ScCoreButtonLabel-sc-s7h2b7-0');
         if (buttonElement) {
             buttonElement.click();
-            console.log('Auto-clicked "Return to stream" button');
+            console.log(`Auto-clicked "${labelText}" button`);
         }
     }
 }
 
 function runChecks() {
-    clickReturnToStreamButton();
     clickClaimBonusButton();
+    clickLabelButton("Return to stream");
+    clickLabelButton("Click Here to Reload Player");
 }
 
 setInterval(runChecks, 1000);
